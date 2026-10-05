@@ -1,0 +1,33 @@
+# Define matrices A and B
+A <- matrix(c(2, 0, 1, 3), ncol = 2)
+B <- matrix(c(5, 2, 4, -1), ncol = 2)
+
+print("Matrix A:")
+print(A)
+
+print("Matrix B:")
+print(B)
+
+# Compute Addition (A + B)
+A_plus_B <- A + B
+print("A + B Result:")
+print(A_plus_B)
+
+# Compute Subtraction (A - B)
+A_minus_B <- A - B
+print("A - B Result:")
+print(A_minus_B)
+
+# Create a 4x4 diagonal matrix with specified entries
+D <- diag(c(4, 1, 2, 3))
+print("Diagonal Matrix D:")
+print(D)
+
+row1 <- c(3, 1, 1, 1, 1)
+
+sub_block <- cbind(rep(2, 4), diag(3, nrow = 4))
+
+custom_matrix <- rbind(row1, sub_block)
+
+print("Custom 5x5 Matrix:")
+print(custom_matrix)
