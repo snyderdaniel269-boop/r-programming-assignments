@@ -1,0 +1,46 @@
+
+# Step 1: Import dataset correctly using sep = "," (since Assignment 6 Dataset is comma-delimited)
+student6 <- read.table(file.choose(), header = TRUE, sep = ",", stringsAsFactors = FALSE)
+
+# Load plyr and compute the mean of Grade by Sex
+library(plyr)
+gender_mean <- ddply(
+  student6,
+  "Sex",
+  summarise,
+  GradeAverage = mean(Grade, na.rm = TRUE)
+)
+
+# Write the grouped means to a text file
+write.table(
+  gender_mean,
+  file = "gender_mean.txt",
+  sep  = "\t",
+  row.names = FALSE
+)
+
+# Step 2: Filter rows where Name contains "i" or "I"
+i_students <- subset(
+  student6,
+  grepl("i", Name, ignore.case = TRUE)
+)
+
+# Extract just the names and write them to a CSV
+write.csv(
+  i_students$Name,
+  file      = "i_students.csv",
+  row.names = FALSE,
+  quote     = FALSE
+)
+
+# Step 3: Export the full filtered dataset to a CSV file
+write.csv(
+  i_students,
+  file      = "i_students_full.csv",
+  row.names = FALSE
+)
+
+# Confirm files exist in the working directory
+file.exists("gender_mean.txt")
+file.exists("i_students.csv")
+file.exists("i_students_full.csv")
