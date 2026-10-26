@@ -1,0 +1,65 @@
+# Assignment #9: Comparing Base R, Lattice, and ggplot2
+# Dataset: uk_serial_df
+library(lattice)
+library(ggplot2)
+df <- uk_serial_df
+
+# 1. BASE R GRAPHICS
+
+
+# Plot 1: Scatter plot (e.g., row index/ID vs. Number of Kills)
+plot(df$rownames, df$number_of_kills,
+     main   = "Base R: Serial Killer Rank vs. Number of Kills",
+     xlab   = "Dataset Rank",
+     ylab   = "Number of Kills",
+     pch    = 19,
+     col    = adjustcolor("darkred", alpha.f = 0.6))
+
+# Plot 2: Histogram (Distribution of number of kills)
+hist(df$number_of_kills,
+     main   = "Base R: Distribution of Number of Kills",
+     xlab   = "Number of Kills",
+     col    = "steelblue",
+     border = "white")
+
+# 2. LATTICE GRAPHICS
+]
+# Plot 3: Box-and-whisker plot or conditional dotplot
+# Let's use a dotplot or stripplot since number_of_kills is numeric
+stripplot(~ number_of_kills,
+          data = df,
+          main = "Lattice: Spread of Number of Kills",
+          xlab = "Number of Kills",
+          pch  = 19,
+          col  = "darkblue")
+
+# Plot 4: Density plot by lattice
+densityplot(~ number_of_kills,
+            data = df,
+            main = "Lattice: Density Plot of Kills",
+            xlab = "Number of Kills")
+
+
+
+# 3. GGPLOT2
+
+# Plot 5: Scatter plot with smoothing trend line
+ggplot(df, aes(x = as.numeric(rownames), y = number_of_kills)) +
+  geom_point(alpha = 0.7, size = 2.5, color = "darkred") +
+  geom_smooth(method = "loess", se = FALSE, color = "black") +
+  labs(
+    title = "ggplot2: Kills by Dataset Position with Trend",
+    x = "Dataset Rank",
+    y = "Number of Kills"
+  ) +
+  theme_minimal(base_family = "sans")
+
+# Plot 6: Histogram with ggplot2
+ggplot(df, aes(x = number_of_kills)) +
+  geom_histogram(bins = 15, fill = "coral3", color = "white") +
+  labs(
+    title = "ggplot2: Distribution of Number of Kills",
+    x = "Number of Kills",
+    y = "Frequency"
+  ) +
+  theme_minimal(base_family = "sans")
